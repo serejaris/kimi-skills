@@ -277,14 +277,14 @@ By default, interactive execution follows the following principles:
 - **Understanding the Problem and Defining the Goal**: Summarize the problem, situation, and goal
 - **Gather the data you need**: Plan your data sources and try to get them as reasonably as possible. Log each attempt and switch alternatives if the primary data source is unavailable
 - **Explore and Clean Data (EDA)**: Clean data → use descriptive statistics to examine distributions, correlations, missing values, outliers
-- **Data Analysis: Analyzing Data to Extract Evidence-Backed Insights**: Applying Methodologies → Reporting Significant Effects → Examining Assumptions → Handling Outliers → Validating Robustness → Ensuring Reproducibility
+- **Data Analysis**: Analyzing Data to Extract Evidence-Backed Insights: Applying Methodologies → Reporting Significant Effects → Examining Assumptions → Handling Outliers → Validating Robustness → Ensuring Reproducibility
 - **Review and Cross-Check**: Step by step to check calculations/analyses and flag anomalies → Validate with alternative data, methods, or slices → Application Domain Plausibility Check and compare against external benchmarks or real data → Clearly explain gaps, validation process, and significance → Output 'review.md'
 - Make sure using a numeric format for number information, not a text format
 - For tasks that involve data analysis, you use Excel formulas to calculate tables.
 - Be sure to check that the cells referenced by the formula are not misaligned. Especially when the calculation result is 0 or null, re-check the data referenced by these cells
 - All values for formula calculations must be in numeric format, not text. Be careful when writing via openpyxl
 - After opening Excel, everything involved in calculation has valid values, and there will be no situation where it cannot be calculated due to circular reference.
-- Pay attention to the accuracy of the reference when calculating the formula, you must carefully check that the cell that your formula is really trying to calculate is the one being referenced, and you must not refer to the wrong cell when calculating
+- Pay attention to the accuracy of the reference when calculating the formula, you must carefully check that the cell you are referencing is the cell that your formula is really trying to calculate, and you must not refer to the wrong cell when calculating
 - For tables involving financial or fiscal data, please ensure that the numbers are calculated and presented in currency format (i.e., by adding the currency symbol before the number).
 - If **scenario assumptions** are required to obtain the calculation results for certain formulas, please **complete these scenario assumptions in advance**. Ensure that **every cell** requiring a calculation in **every table** receives a **calculated value**, rather than a note stating "Scenario simulation required" or "Manual calculation required."
 </important-guideline>
@@ -447,7 +447,7 @@ When PivotTable need is detected, you MUST:
 # Step 2: Create PivotTable with chart
 ./scripts/Xlsx pivot \
     data.xlsx output.xlsx \
-    --source "Sales!A1:F100" \
+    --source "Sheet!A1:F100" \
     --rows "Category" \
     --values "Revenue:sum" \
     --location "Summary!A3" \
@@ -660,6 +660,7 @@ Use this style when the task involves: stock, GDP, salary, revenue, profit, budg
 | **Outside China (International)** | **Green** | **Red** |
 
 ### Python Color Palette
+
 ```python
 # Professional Finance Style Palette
 from openpyxl.styles import PatternFill, Font, Border, Side, Alignment
@@ -892,10 +893,9 @@ chart.y_axis.title = 'Value'
 chart.x_axis.title = 'Month'
 
 data = Reference(ws, min_col=2, min_row=1, max_row=13, max_col=3)
-cats_ref = Reference(ws, min_col=1, min_row=2, max_row=13)
-
 chart.add_data(data, titles_from_data=True)
-chart.set_categories(cats_ref)
+cats = Reference(ws, min_col=1, min_row=2, max_row=13)
+chart.set_categories(cats)
 
 ws.add_chart(chart, "E2")
 ```

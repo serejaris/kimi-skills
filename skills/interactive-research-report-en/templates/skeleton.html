@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REPORT TITLE · Interactive Research Edition</title>
+<meta name="description" content="One-sentence report thesis.">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Era progress rail (optional: only for multi-window historical reports) -->
+<nav id="era-rail" aria-label="Window navigation">
+  <div class="rail-year" id="rail-year">YYYY</div>
+  <div class="rail-track" id="rail-track"></div>
+</nav>
+
+<!-- ═══ Cover · full-bleed, three animated variants (see COVER.md) ═══ -->
+<header id="cover">
+  <canvas id="cover-canvas"></canvas>
+  <canvas id="cover-canvas-x" style="display:none"></canvas>
+  <canvas id="cover-canvas-w" style="display:none"></canvas>
+  <div class="cover-inner">
+    <p class="cover-kicker">SECTOR DEEP DIVE · DATA AS OF YYYY-MM-DD</p>
+    <h1 class="cover-title">Big serif title,<br><span class="cover-num">accent line</span></h1>
+    <p class="cover-sub">Subtitle: what this report answers</p>
+    <p class="cover-lede">Four-sentence lede. State the thesis, the analogue, and the one genuine difference.</p>
+    <div class="cover-chips">
+      <button class="chip" data-goto="#sec-exec">Key findings</button>
+      <!-- one chip per Part -->
+    </div>
+    <p class="cover-anchor">Evidence graded: company primary &gt; cross-check &gt; broker relay &gt; derived [flagged] · No ratings, no price targets</p>
+    <div class="cover-mode" id="cover-mode" aria-label="Cover artwork variant">
+      <button data-mode="rec" class="on">A · [recursion name]</button>
+      <button data-mode="x">B · [exploded name]</button>
+      <button data-mode="w">C · The blueprint</button>
+    </div>
+    <div class="scroll-hint"><span></span>SCROLL</div>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══ §0 Executive summary: prose → one evidence-bearing signature chart → total timeline ═══ -->
+<section id="sec-exec" class="band" data-win="frame">
+  <div class="prose">
+    <p class="sec-no">§0 · Key findings</p>
+    <h2>Thesis headline in sentence case</h2>
+    <p class="dek">Italic serif deck framing the section.</p>
+    <p>Narrative prose. Dense numbers go into a <code>table.dt</code>, not into arrow chains.</p>
+  </div>
+  <!-- Replace with the strongest data-shaped chart for the thesis; never use a number grid here. -->
+  <div class="wide xl"><div id="exec-chart" class="chart-frame"></div></div>
+  <div class="wide xl"><div id="timeline66-chart" class="chart-frame"></div></div>
+</section>
+
+<!-- Repeat .band sections per Part. Chart hosts: <div class="wide xl"><div id="x-chart" class="chart-frame"></div></div> -->
+
+<!-- ═══ Sources footer: prose header/notes + wide.xl anchor register ═══ -->
+<footer id="sec-sources">
+  <div class="prose">
+    <p class="sec-no">Sources &amp; method</p>
+    <h2>Method, discipline, and sources</h2>
+    <div class="note-box">
+      <p><b>Evidence grading.</b> …</p>
+      <p><b>Source classes, each dated.</b> <span class="src-cat company">Company disclosure</span>
+        <span class="src-cat broker">Broker research</span> <span class="src-cat industry">Industry &amp; official</span>
+        <span class="src-cat kimi">Research compilation</span></p>
+      <p><b>Measurement discipline.</b> …</p>
+    </div>
+  </div>
+  <div class="wide xl">
+    <div style="margin-top:26px">
+      <p class="chart-title">Anchor register · K1–K30</p>
+      <p class="chart-sub">EVERY NUMBER THE REPORT LEANS ON, WITH ITS DATED SOURCE</p>
+    </div>
+    <div id="source-list"></div>
+  </div>
+  <div class="prose">
+    <p class="colophon">Interactive research edition · Compiled YYYY-MM-DD · No investment advice</p>
+  </div>
+</footer>
+
+</main>
+
+<!-- Persistent context rail (CHARTS.md P16) -->
+<aside id="dash-rail" aria-label="Cycle dashboard"><canvas id="dash-canvas"></canvas></aside>
+
+<!-- Drill-down card (CHARTS.md P16) -->
+<div id="drill-card" hidden></div>
+
+<script src="vendor/d3.min.js"></script>
+<script src="vendor/topojson-client.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/cover.js"></script>
+<script src="js/cover-exploded.js"></script>
+<script src="js/cover-wire.js"></script><!-- owns the 3-way mode switch: load AFTER the other covers -->
+<script src="js/dashboard.js"></script>
+<!-- one script per chart module, order = page order -->
+<script src="js/sources.js"></script>
+<script src="js/main.js"></script><!-- scroll engine · quote renderer · ◆ buttons · count-up -->
+</body>
+</html>

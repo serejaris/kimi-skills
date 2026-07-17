@@ -31,7 +31,8 @@ The SDK needs an API key from `api_key=...`, `KIMI_API_KEY`, or
 4. Build `params` exactly from the Markdown requirements. Pay attention to ticker
    symbol, exchange suffix, date range, statement type, reporting period,
    currency, and metric definitions.
-5. Use `python3 scripts/yahoo_finance_tool.py call` to call `call_data_source_tool`.
+5. Use `python3 scripts/yahoo_finance_tool.py call` to call
+   `call_data_source_tool`.
 6. If the call fails, explain the failure reason from the response.
 7. If the call succeeds, save any returned files first, then answer using
    `resp.result.assistant`; ignore `resp.result.user` unless display content is

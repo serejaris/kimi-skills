@@ -1,0 +1,4 @@
+interface:
+  display_name: "Interactive Research Report"
+  short_description: "Turn deep research reports into theme-native, data-drillable professional interactive research websites"
+  default_prompt: "Use $interactive-research-report to turn this research document into a theme-native interactive report website."

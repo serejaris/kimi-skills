@@ -215,14 +215,14 @@ Follow these steps in order, skipping only if there is a clear reason why they a
 
 ### Step 1: Understanding the Skill with Concrete Examples
 
-Skip this step only if the skill's usage patterns are already clearly understood. It remains valuable even when working with an existing skill.
+Skip this step only when the skill's usage patterns are already clearly understood. It remains valuable even when working with an existing skill.
 
 To create an effective skill, clearly understand concrete examples of how the skill will be used. This understanding can come from either direct user examples or generated examples that are validated with user feedback.
 
 For example, when building an image-editor skill, relevant questions include:
 
 - "What functionality should the image-editor skill support? Editing, rotating, anything else?"
-- "Can you give me some examples of how this skill would be used?"
+- "Can you give some examples of how this skill would be used?"
 - "I can imagine users asking for things like 'Remove the red-eye from this image' or 'Rotate this image'. Are there other ways you imagine this skill being used?"
 - "What would a user say that should trigger this skill?"
 
@@ -247,7 +247,7 @@ Example: When designing a `frontend-webapp-builder` skill for queries like "Buil
 1. Writing a frontend webapp requires the same boilerplate HTML/React each time
 2. An `assets/hello-world/` template containing the boilerplate HTML/React project files would be helpful to store in the skill
 
-Example: When building a `big-query` skill to handle queries like "How many users have logged in today?", the analysis shows:
+Example: When building a `big-query` skill to handle queries like "How many users have logged in today?" the analysis shows:
 
 1. Querying BigQuery requires re-discovering the table schemas and relationships each time
 2. A `references/schema.md` file documenting the table schemas would be helpful to store in the skill
