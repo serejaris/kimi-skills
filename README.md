@@ -4,9 +4,9 @@
 
 - **267** встроенных скиллов (`/app/.agents/skills/`) — каталог ниже
 - **7** скиллов плагинов (`/app/.agents/plugins/*/skills/`)
-- **16** файлов `SKILL.md` (9 встроенных + 7 плагинов) уже лежат в репозитории: `skills/` и `plugin-skills/`
+- **2 574 файла** — полный дамп всех скиллов лежит в репозитории: `skills/` и `plugin-skills/`
 
-> Полный дамп всех 267 скиллов (2 574 файла, ~38 МБ после фильтрации `node_modules` и бинарников) нельзя запушить через API GitHub по одному файлу — см. `EXCLUDED.md` и раздел «Полный дамп» в конце.
+> Из исходных 128 844 файлов (1.7 ГБ) исключены `node_modules`, `__pycache__`, `.git`, бинарники и файлы >2 МБ — подробности в `EXCLUDED.md`.
 
 ## Скиллы плагинов (7)
 
@@ -312,52 +312,10 @@
 
 ---
 
-## Полный дамп (2 574 файла, ~38 МБ)
+## Полный дамп
 
-Сейчас в репозитории: этот каталог, 16 файлов `SKILL.md` и `EXCLUDED.md`.
+✅ **Импортирован полностью** — все 2 574 файла (267 встроенных скиллов + 7 скиллов плагинов, включая шаблоны и референсы) находятся в `skills/` и `plugin-skills/`.
 
-Полные исходники всех 267 скиллов (скрипты, references, assets — за вычетом `node_modules`, бинарников и файлов >2 МБ, см. `EXCLUDED.md`) упакованы в архив `kimi-skills.tar.gz`. Через API GitHub такой объём по одному файлу не запушить (каждый файл проходит через контекст модели), поэтому есть два способа импорта:
-
-### Способ 1 — локально (рекомендуется, 3 команды)
-
-```bash
-git clone https://github.com/serejaris/kimi-skills.git && cd kimi-skills
-curl -L "https://www.kimi.com/apiv2-files/sign-obj/kimi-fs%2Ffiles%2Fblob%2F85b845397eb31bb5835b7c4d1851ea97c5d8bb3c9f0506be8bafbe61466ec10f?filename=kimi-skills.tar.gz&sig=xdFb6scnv63FvOnGst1C4zxSbUqlFMjTFoOdnyFMyBs=&t=o" -o /tmp/dump.tar.gz && tar xzf /tmp/dump.tar.gz
-git add -A && git commit -m "Import full skills dump (2,574 files)" && git push
-```
-
-### Способ 2 — GitHub Actions (без локальной машины)
-
-Создайте файл `.github/workflows/import.yml` через веб-интерфейс (**Add file → Create new file**), вставьте:
-
-```yaml
-name: Import skills dump
-on:
-  workflow_dispatch:
-
-jobs:
-  import:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - name: Download and extract dump
-        run: |
-          curl -L "https://www.kimi.com/apiv2-files/sign-obj/kimi-fs%2Ffiles%2Fblob%2F85b845397eb31bb5835b7c4d1851ea97c5d8bb3c9f0506be8bafbe61466ec10f?filename=kimi-skills.tar.gz&sig=xdFb6scnv63FvOnGst1C4zxSbUqlFMjTFoOdnyFMyBs=&t=o" -o /tmp/dump.tar.gz
-          tar xzf /tmp/dump.tar.gz -C "$GITHUB_WORKSPACE"
-      - name: Commit and push
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "Import full skills dump (2,574 files)" || echo "nothing to commit"
-          git push
-```
-
-Затем: **Actions → Import skills dump → Run workflow**. После успешного импорта удалите workflow-файл.
-
-> Ссылка на архив — временная (подписанный URL, ~6 дней). Если протухла — попросите меня перевыложить.
 
 ---
 
